@@ -16,4 +16,9 @@ class SubscribeTransaction extends Model
         'proof',
         'subscription_start_date',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
