@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'occupation' => $request->occupation,
-            'avatar' => $request->avatarPath,
+            'avatar' => $avatarPath,
             'password' => Hash::make($request->password),
         ]);
 
