@@ -16,7 +16,7 @@ class Course extends Model
         'about',
         'path_trailer',
         'thumbnail',
-        'tearcher_id',
+        'teacher_id',
         'category_id',
     ];
 
