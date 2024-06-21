@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCourseVideoRequest;
+use App\Models\Course;
 use App\Models\CourseVideo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CourseVideoController extends Controller
 {
@@ -12,23 +16,31 @@ class CourseVideoController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Course $course)
     {
-        //
+        return view('admin.course_videos.create', compact('course'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCourseVideoRequest $request, Course $course)
     {
-        //
+        DB::transaction(function () use ($request, $course) {
+            $validated = $request->validated();
+
+            $validated['course_id'] = $course->id;
+            CourseVideo::create($validated);
+
+        });
+
+        return redirect()->route('admin.courses.show', $course->id);
     }
 
     /**

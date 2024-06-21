@@ -65,7 +65,7 @@ class CourseController extends Controller
 
             $course = Course::create($validated);
 
-            if (!empty($validated['course_keypoints'])) {
+            if ($validated['course_keypoints']) {
                 foreach ($validated['course_keypoints'] as $keypoint) {
                     $course->course_keypoints()->create([
                         'name' => $keypoint
