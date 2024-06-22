@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseVideoController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscribeTransactionController;
@@ -47,6 +48,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/add/video/save/{course:id}', [CourseVideoController::class, 'store'])->middleware('role:teacher|owner')->name('course.add_video.save');
         Route::resource('course_videos', CourseVideoController::class)->middleware('role:owner|teacher');
     });
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 require __DIR__ . '/auth.php';
