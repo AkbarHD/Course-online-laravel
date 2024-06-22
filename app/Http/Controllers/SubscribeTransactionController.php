@@ -12,7 +12,10 @@ class SubscribeTransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transaction = SubscribeTransaction::with(['user'])->orderByDesc('id')->get();
+        return view('admin.transactions.index', [
+            'transactions' => $transaction
+        ]);
     }
 
     /**
