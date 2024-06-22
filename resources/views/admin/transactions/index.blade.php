@@ -40,12 +40,23 @@
                             <h3 class="text-indigo-950 text-xl font-bold">
                                 {{ $transaction->created_at->format('d M Y') }}</h3>
                         </div>
+                        <div>
+                            <p class="text-slate-500 mb-3 text-sm">Status</p>
+                            <h3 class="text-indigo-950  text-xl font-bold">
+                                @if ($transaction->is_paid == 1)
+                                    <span class="bg-green-700 text-white text-sm px-3 py-2 rounded">Paid</span>
+                                @else
+                                    <span class="bg-red-600 text-sm  text-white px-3 py-2 rounded-full">Unpaid</span>
+                                @endif
+                            </h3>
+                        </div>
                         <div class="hidden md:flex flex-col">
                             <p class="text-slate-500 text-sm">Student</p>
                             <h3 class="text-indigo-950 text-xl font-bold">{{ $transaction->user->name }}</h3>
                         </div>
                         <div class="hidden md:flex flex-row items-center gap-x-3">
-                            <a href="#" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+                            <a href="{{ route('admin.subscribe_transactions.show', $transaction->id) }}"
+                                class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                                 View Details
                             </a>
                         </div>
