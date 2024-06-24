@@ -29,8 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/checkout', [FrontController::class, 'checkout'])->name('front.checkout')->middleware('role:student');
-    Route::post('/checkout/store', [FrontController::class, 'checkout_store'])->name('front.checkout')->middleware('role:student');
+    Route::get('/checkout', [FrontController::class, 'checkout'])->name('front.checkout')->middleware('role:student|teacher');
+    Route::post('/checkout/store', [FrontController::class, 'checkout_store'])->name('front.checkout.store')->middleware('role:student|teacher');
 
     Route::get('/learning/{course}/{courseVideoId}', [FrontController::class, 'learning'])->name('front.learning')
         ->middleware('role:student|teacher|owner');

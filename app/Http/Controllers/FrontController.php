@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubscribeTransactionRequest;
 use App\Models\Course;
+use App\Models\SubscribeTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
 {
@@ -20,10 +23,38 @@ class FrontController extends Controller
         return view('front.details', compact(['course']));
     }
 
+    public function checkout()
+    {
+
+        return view('front.checkout');
+    }
+
+    public function checkout_store(StoreSubscribeTransactionRequest $request)
+    {
+        $user = Auth::user();
+        DB::transaction(function () use ($request, $user) {
+
+            $validated = $request->validated();
+            if ($request->hasFile('proof')) {
+                $proofPath = $request->file('proof')->store('proofs', 'public');
+                $validated['proof'] = $proofPath;
+            }
+            $validated['user_id'] = $user->id;
+            $validated['total_amount'] = 50000;
+            $validated['is_paid'] = false;
+
+            $transaction = SubscribeTransaction::create($validated);
+
+        });
+
+        return redirect()->route('dashboard');
+    }
+
     public function learning(Course $course, $courseVideoId)
     {
         $user = Auth::user();
-        if (!$user->hasRole('owner') && !$user->hasActiveSubscription()) {
+        $isOwnerOrCreator = $user->hasRole('owner') || ($user->hasRole('teacher') && $course->teacher->user_id === $user->id);
+        if (!$isOwnerOrCreator && !$user->hasActiveSubscription()) {
             return redirect()->route('front.pricing');
         }
 
@@ -41,5 +72,10 @@ class FrontController extends Controller
             'course' => $course,
             'video' => $video
         ]);
+    }
+
+    public function pricing()
+    {
+        return view('front.pricing');
     }
 }

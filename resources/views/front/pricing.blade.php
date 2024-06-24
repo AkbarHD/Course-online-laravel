@@ -9,14 +9,15 @@
         rel="stylesheet" />
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 </head>
 
 <body class="text-black font-poppins pt-10 pb-[50px]">
     <div id="hero-section"
-        class="max-w-[1200px] mx-auto w-full flex flex-col gap-10 pb-[50px] bg-[url('assets/background/Hero-Banner.png')] bg-center bg-no-repeat bg-cover rounded-[32px] overflow-hidden">
+        class="max-w-[1200px] mx-auto w-full h-[536px] flex flex-col gap-10 pb-[50px] bg-[url('assets/background/Hero-Banner.png')] bg-center bg-no-repeat bg-cover rounded-[32px] overflow-hidden relative">
         <nav class="flex justify-between items-center pt-6 px-[50px]">
-            <a href="">
-                {{-- <img src="assets/logo/logo.svg" alt="logo"> --}}
+            <a href="index.html">
                 <h1 class="font-bold text-white " style="font-size: 30px">AkbarHD</h1>
             </a>
             <ul class="flex items-center gap-[30px] text-white">
@@ -26,6 +27,7 @@
                 <li>
                     <a href="{{ route('front.pricing') }}" class="font-semibold">Pricing</a>
                 </li>
+
                 <li>
                     <a href="" class="font-semibold">Benefits</a>
                 </li>
@@ -34,270 +36,148 @@
                 </li>
             </ul>
             <div class="flex gap-[10px] items-center">
-                @guest
-                    <a href="{{ route('register') }}"
-                        class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Sign
-                        Up</a>
-                    <a href="{{ route('login') }}"
-                        class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Sign
-                        In</a>
-                @endguest
-
                 @auth
-                    <a href="{{ route('dashboard') }}"
-                        class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Dashboard
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                            class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Logout
-                        </button>
-                    </form>
+                    <div class="flex gap-[10px] items-center">
+                        <div class="flex flex-col items-end justify-center">
+                            <p class="font-semibold text-white">{{ Auth::user()->name }}</p>
+                            @if (Auth::user()->hasActiveSubscription())
+                                <p
+                                    class="p-[2px_10px] rounded-full bg-[#FF6129] font-semibold text-xs text-white text-center">
+                                    PRO
+                                </p>
+                            @else
+                            @endif
+                        </div>
+                        <div class="w-[56px] h-[56px] overflow-hidden rounded-full flex shrink-0">
+                            <a href="{{ route('dashboard') }}">
+                                <img src="{{ Storage::url(Auth::user()->avatar) }}" class="w-full h-full object-cover"
+                                    alt="photo">
+                            </a>
+                        </div>
+                    </div>
                 @endauth
+                @guest
+                    <div class="flex gap-[10px] items-center">
+                        <a href="{{ route('register') }}"
+                            class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Sign
+                            Up</a>
+                        <a href="{{ route('login') }}"
+                            class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Sign
+                            In</a>
+                    </div>
+                @endguest
             </div>
         </nav>
-        <div class="flex flex-col items-center gap-[30px]">
-            <div class="w-fit flex items-center gap-3 p-2 pr-6 rounded-full bg-[#FFFFFF1F] border border-[#3477FF24]">
-                <div class="w-[100px] h-[48px] flex shrink-0">
-                    <img src="assets/icon/avatar-group.png" class="object-contain" alt="icon">
-                </div>
-                <p class="font-semibold text-sm text-white">Sangat Direkomendasikan</p>
-            </div>
-            <div class="flex flex-col gap-[10px]">
-                <h1 class="font-semibold leading-[82px] text-center gradient-text-hero" style="font-size: 60px">Bangun
-                    Karier Masa
-                    Depan.
-                </h1>
-                <p class="text-center text-xl leading-[36px] text-[#F5F8FA]">AkbarHD menyediakan kursus online
-                    berkualitas tinggi bagi anda untuk mengembangkan <br>
-                    keterampilan Anda dan membangun portofolio yang luar biasa </p>
-            </div>
-            <div class="flex gap-6 w-fit">
-                <a href=""
-                    class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Jelajahi
-                    kursus</a>
-                <a href=""
-                    class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">bimbingan
-                    karir</a>
-            </div>
-        </div>
-        {{-- <div class="flex gap-[70px] items-center justify-center">
-            <div>
-                <img src="assets/icon/logo-55.svg" alt="icon">
-            </div>
-            <div>
-                <img src="assets/icon/logo.svg" alt="icon">
-            </div>
-            <div>
-                <img src="assets/icon/logo-54.svg" alt="icon">
-            </div>
-            <div>
-                <img src="assets/icon/logo.svg" alt="icon">
-            </div>
-            <div>
-                <img src="assets/icon/logo-52.svg" alt="icon">
-            </div>
-        </div> --}}
     </div>
-    <section id="Top-Categories" class="max-w-[1200px] mx-auto flex flex-col p-[70px_50px] gap-[30px]">
-        <div class="flex flex-col gap-[30px]">
+    <section class="max-w-[1100px] w-full mx-auto absolute -translate-x-1/2 left-1/2 top-[170px]">
+        <div class="flex flex-col gap-[30px] items-center">
             <div
                 class="gradient-badge w-fit p-[8px_16px] rounded-full border border-[#FED6AD] flex items-center gap-[6px]">
                 <div>
                     <img src="assets/icon/medal-star.svg" alt="icon">
                 </div>
-                <p class="font-medium text-sm text-[#FF6129]">Kategori Teratas</p>
+                <p class="font-medium text-sm text-[#FF6129]">Better Pricing For You</p>
             </div>
-            <div class="flex flex-col">
-                <h2 class="font-bold text-[40px] leading-[60px]">Jelajahi Kursus</h2>
-                <p class="text-[#6D7786] text-lg -tracking-[2%]">Mengejar keterampilan sesuai permintaan dan karier
-                    bergaji tinggi
-                    tahun ini</p>
+            <div class="flex flex-col text-white text-center">
+                <h2 class="font-bold text-[40px] leading-[60px]">Invest & Get Bigger Return</h2>
+                <p class="text-lg -tracking-[2%]">Catching up the on demand skills and high paying career this year</p>
             </div>
-        </div>
-        <div class="grid grid-cols-4 gap-[30px]">
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Software Development</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Digital Marketing</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-2.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Business Intelligence</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-3.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Freelancing Journey</p>
-            </a>
-        </div>
-        <div class="grid grid-cols-3 gap-[30px]">
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Product & Customer Data Analytics</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-4.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">UX Design <br> Copywriting</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Software Quality Assurance</p>
-            </a>
-        </div>
-    </section>
-    <section id="Popular-Courses"
-        class="max-w-[1200px] mx-auto flex flex-col p-[70px_82px_0px] gap-[30px] bg-[#F5F8FA] rounded-[32px]">
-        <div class="flex flex-col gap-[30px] items-center text-center">
-            <div
-                class="gradient-badge w-fit p-[8px_16px] rounded-full border border-[#FED6AD] flex items-center gap-[6px]">
-                <div>
-                    <img src="assets/icon/medal-star.svg" alt="icon">
-                </div>
-                <p class="font-medium text-sm text-[#FF6129]">Popular Courses</p>
-            </div>
-            <div class="flex flex-col">
-                <h2 class="font-bold  leading-[60px]" style="font-size: 30px;">Jangan Sampai Ketinggalan, Pelajari
-                    Sekarang</h2>
-                <p class="text-[#6D7786] text-lg -tracking-[2%]">Mengejar keterampilan sesuai permintaan dan karier
-                    bergaji tinggi tahun ini</p>
-            </div>
-        </div>
-        <div class="relative">
-            <button class="btn-prev absolute rotate-180 -left-[52px] top-[216px]">
-                <img src="assets/icon/arrow-right.svg" alt="icon">
-            </button>
-            <button class="btn-prev absolute -right-[52px] top-[216px]">
-                <img src="assets/icon/arrow-right.svg" alt="icon">
-            </button>
-            <div id="course-slider" class="w-full">
-                @forelse ($courses as $course)
-                    <div class="course-card w-1/3 px-3 pb-[70px] mt-[2px]">
-                        <div
-                            class="flex flex-col rounded-t-[12px] rounded-b-[24px] gap-[32px] bg-white w-full pb-[10px] overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">
-                            <a href="{{ route('front.details', $course) }}"
-                                class="thumbnail w-full h-[200px] shrink-0 rounded-[10px] overflow-hidden">
-                                <img src="{{ Storage::url($course->thumbnail) }}" class="w-full h-full object-cover"
-                                    alt="thumbnail">
-                            </a>
-                            <div class="flex flex-col px-4 gap-[10px]">
-                                <a href="{{ route('front.details', $course->slug) }}"
-                                    class="font-semibold text-lg line-clamp-2 hover:line-clamp-none min-h-[56px]">{{ $course->name }}</a>
-                                <div class="flex justify-between items-center">
-                                    <div class="flex items-center gap-[2px]">
-                                        <div>
-                                            <img src="assets/icon/star.svg" alt="star">
-                                        </div>
-                                        <div>
-                                            <img src="assets/icon/star.svg" alt="star">
-                                        </div>
-                                        <div>
-                                            <img src="assets/icon/star.svg" alt="star">
-                                        </div>
-                                        <div>
-                                            <img src="assets/icon/star.svg" alt="star">
-                                        </div>
-                                        <div>
-                                            <img src="assets/icon/star.svg" alt="star">
-                                        </div>
-                                    </div>
-                                    <p class="text-right text-[#6D7786]">{{ $course->students->count() }} students
-                                    </p>
+            <div class="max-w-[1000px] w-full flex gap-[30px]">
+                <div class="flex flex-col rounded-3xl p-8 gap-[30px] bg-white h-fit">
+                    <div class="flex flex-col gap-5">
+                        <div class="flex flex-col gap-4">
+                            <p class="font-semibold text-4xl leading-[54px]">Scholarship</p>
+                            <p class="text-[#475466] text-lg">Access to few online courses that helps you to jump
+                                started your new career path</p>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <p class="font-semibold text-4xl leading-[54px]">Rp 0</p>
+                            <p class="text-[#475466] text-lg">Forever Free</p>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 flex shrink-0">
+                                    <img src="assets/icon/tick-circle.svg" class="w-full h-full object-cover"
+                                        alt="icon">
                                 </div>
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
-                                        <img src="{{ Storage::url($course->teacher->user->avatar) }}"
-                                            class="w-full h-full object-cover" alt="icon">
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <p class="font-semibold">{{ $course->teacher->user->name }}</p>
-                                        <p class="text-[#6D7786]">{{ $course->category->name }}</p>
-                                    </div>
+                                <p class="text-[#475466]">Access all course materials including videos, docs, career
+                                    guidance, etc</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 flex shrink-0">
+                                    <img src="assets/icon/tick-circle.svg" class="w-full h-full object-cover"
+                                        alt="icon">
                                 </div>
+                                <p class="text-[#475466]">Unlock all course badges to enhance career profile to apply a
+                                    job after completed</p>
                             </div>
                         </div>
                     </div>
-
-                @empty
-                @endforelse
-
+                    <a href=""
+                        class="p-[20px_32px] rounded-full text-center font-semibold text-xl ring-1 ring-black transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Request
+                        for Access</a>
+                </div>
+                <div class="flex flex-col rounded-3xl p-8 gap-[30px] bg-white h-fit">
+                    <div class="flex flex-col gap-5">
+                        <div class="flex flex-col gap-4">
+                            <p class="font-semibold text-4xl leading-[54px]">Premium</p>
+                            <p class="text-[#475466] text-lg">All access to more than 20,000 online courses to grow your
+                                future career easily</p>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <p class="font-semibold text-4xl leading-[54px]">Rp 429000</p>
+                            <p class="text-[#475466] text-lg">Monthly</p>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 flex shrink-0">
+                                    <img src="assets/icon/tick-circle.svg" class="w-full h-full object-cover"
+                                        alt="icon">
+                                </div>
+                                <p class="text-[#475466]">Access all course materials including videos, docs, career
+                                    guidance, etc</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 flex shrink-0">
+                                    <img src="assets/icon/tick-circle.svg" class="w-full h-full object-cover"
+                                        alt="icon">
+                                </div>
+                                <p class="text-[#475466]">Unlock all course badges to enhance career profile to apply a
+                                    job after completed</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 flex shrink-0">
+                                    <img src="assets/icon/tick-circle.svg" class="w-full h-full object-cover"
+                                        alt="icon">
+                                </div>
+                                <p class="text-[#475466]">Receive premium rewards such as templates</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 flex shrink-0">
+                                    <img src="assets/icon/tick-circle.svg" class="w-full h-full object-cover"
+                                        alt="icon">
+                                </div>
+                                <p class="text-[#475466]">Access jobs portal and exclusive interview</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 flex shrink-0">
+                                    <img src="assets/icon/tick-circle.svg" class="w-full h-full object-cover"
+                                        alt="icon">
+                                </div>
+                                <p class="text-[#475466]">Unlock all course badges to enhance career profile to apply a
+                                    job after completed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ route('front.checkout') }}"
+                        class="p-[20px_32px] bg-[#FF6129] text-white rounded-full text-center font-semibold text-xl transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Subscribe
+                        Now</a>
+                </div>
             </div>
         </div>
     </section>
-    <section id="Pricing" class="max-w-[1200px] mx-auto flex justify-between items-center p-[70px_100px]">
-        <div class="relative">
-            <div class="w-[355px] h-[488px]">
-                <img src="assets/background/benefit_illustration.png" alt="icon">
-            </div>
-            <div
-                class="absolute w-[230px] transform -translate-y-1/2 top-1/2 left-[214px] bg-white z-10 rounded-[20px] gap-4 p-4 flex flex-col shadow-[0_17px_30px_0_#0D051D0A]">
-                <p class="font-semibold">Materials</p>
-                <div class="flex gap-2 items-center">
-                    <div>
-                        <img src="assets/icon/video-play.svg" alt="icon">
-                    </div>
-                    <p class="font-medium">Videos</p>
-                </div>
-                <div class="flex gap-2 items-center">
-                    <div>
-                        <img src="assets/icon/note-favorite.svg" alt="icon">
-                    </div>
-                    <p class="font-medium">Handbook</p>
-                </div>
-                <div class="flex gap-2 items-center">
-                    <div>
-                        <img src="assets/icon/3dcube.svg" alt="icon">
-                    </div>
-                    <p class="font-medium">Assets</p>
-                </div>
-                <div class="flex gap-2 items-center">
-                    <div>
-                        <img src="assets/icon/award.svg" alt="icon">
-                    </div>
-                    <p class="font-medium">Certificates</p>
-                </div>
-                <div class="flex gap-2 items-center">
-                    <div>
-                        <img src="assets/icon/book.svg" alt="icon">
-                    </div>
-                    <p class="font-medium">Documentations</p>
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col text-left gap-[30px]">
-            <h2 class="font-bold text-[36px] leading-[52px]">Learn From Anywhere,<br>Anytime You Want</h2>
-            <p class="text-[#475466] text-lg leading-[34px]">Growing new skills would be more flexible without <br>
-                limit we help you to access all course materials.</p>
-            <a href=""
-                class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980] w-fit">Check
-                Pricing</a>
-        </div>
-    </section>
-    <section id="Zero-to-Success"
-        class="max-w-[1200px] mx-auto flex flex-col py-[70px] px-[50px] gap-[30px] bg-[#F5F8FA] rounded-[32px]">
+    {{-- <section id="Zero-to-Success"
+        class="h-[885px] mt-[264px] max-w-[1200px] mx-auto flex flex-col justify-end py-[70px] px-[50px] gap-[30px] bg-[#F5F8FA] rounded-[32px]">
         <div class="flex flex-col gap-[30px] items-center text-center">
             <div
                 class="gradient-badge w-fit p-[8px_16px] rounded-full border border-[#FED6AD] flex items-center gap-[6px]">
@@ -767,8 +647,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section id="FAQ" class="max-w-[1200px] mx-auto flex flex-col py-[70px] px-[100px]">
+    </section> --}}
+    {{-- <section id="FAQ" class="max-w-[1200px] mx-auto flex flex-col py-[70px] px-[100px]">
         <div class="flex justify-between items-center">
             <div class="flex flex-col gap-[30px]">
                 <div
@@ -846,8 +726,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <footer
+    </section> --}}
+    {{-- <footer
         class="max-w-[1200px] mx-auto flex flex-col pt-[70px] pb-[50px] px-[100px] gap-[50px] bg-[#F5F8FA] rounded-[32px]">
         <div class="flex justify-between">
             <a href="">
@@ -914,14 +794,17 @@
         <div class="w-full h-[51px] flex items-end border-t border-[#E7EEF2]">
             <p class="mx-auto text-sm text-[#6D7786] -tracking-[2%]">All Rights Reserved Alqowy BuildWithAngga 2024</p>
         </div>
-    </footer>
+    </footer> --}}
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
 
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+    <script src="main.js"></script>
 </body>
 
 </html>

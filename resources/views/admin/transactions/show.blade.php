@@ -58,8 +58,7 @@
                         </div>
                     </div>
                     <div>
-                        <img src="https://i.pinimg.com/236x/68/ed/dc/68eddcea02ceb29abde1b1c752fa29eb.jpg"
-                            alt="">
+                        <img width="300" src="{{ Storage::url($transaction->proof) }}" alt="">
                     </div>
                 </div>
                 <hr class="my-5">
