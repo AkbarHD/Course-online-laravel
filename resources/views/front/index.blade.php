@@ -47,6 +47,12 @@
                     <a href="{{ route('dashboard') }}"
                         class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Dashboard
                     </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Logout
+                        </button>
+                    </form>
                 @endauth
             </div>
         </nav>
@@ -218,7 +224,8 @@
                                             <img src="assets/icon/star.svg" alt="star">
                                         </div>
                                     </div>
-                                    <p class="text-right text-[#6D7786]">{{ $course->students->count() }} students</p>
+                                    <p class="text-right text-[#6D7786]">{{ $course->students->count() }} students
+                                    </p>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
