@@ -18,11 +18,13 @@ class DashboardController extends Controller
         $coursesQuery = Course::query(); // query itu bakal ada query lanjutan
         if ($user->hasRole('teacher')) {
             $coursesQuery->whereHas('teacher', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            });
+                $query->where('user_id', $user->id); //memfilter kursus-kursus sehingga hanya kursus yang diajar oleh guru yang sedang login yang akan diambil.
+            });  //$coursesQuery->select('id')
 
+            // hanya menghitung student yang di ajar guru yg sdg login
             $students = CourseStudent::whereIn('course_id', $coursesQuery->select('id'))->distinct('user_id')->count('user_id');
         } else {
+            // kalo ini menghitung semua user yang masuk kelas
             $students = CourseStudent::distinct('user_id')->count('user_id');
         }
 

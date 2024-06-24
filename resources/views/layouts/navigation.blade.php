@@ -35,6 +35,9 @@
                             {{ __('Manage Subscriptions') }}
                         </x-nav-link>
                     @endrole
+                    <x-nav-link :href="route('front.index')" :active="request()->routeIs('front.index')">
+                        {{ __('Home') }}
+                    </x-nav-link>
 
                 </div>
 

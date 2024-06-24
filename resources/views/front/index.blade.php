@@ -16,7 +16,8 @@
         class="max-w-[1200px] mx-auto w-full flex flex-col gap-10 pb-[50px] bg-[url('assets/background/Hero-Banner.png')] bg-center bg-no-repeat bg-cover rounded-[32px] overflow-hidden">
         <nav class="flex justify-between items-center pt-6 px-[50px]">
             <a href="">
-                <img src="assets/logo/logo.svg" alt="logo">
+                {{-- <img src="assets/logo/logo.svg" alt="logo"> --}}
+                <h1 class="font-bold text-white " style="font-size: 30px">AkbarHD</h1>
             </a>
             <ul class="flex items-center gap-[30px] text-white">
                 <li>
@@ -33,12 +34,20 @@
                 </li>
             </ul>
             <div class="flex gap-[10px] items-center">
-                <a href=""
-                    class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Sign
-                    Up</a>
-                <a href=""
-                    class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Sign
-                    In</a>
+                @guest
+                    <a href="{{ route('register') }}"
+                        class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Sign
+                        Up</a>
+                    <a href="{{ route('login') }}"
+                        class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Sign
+                        In</a>
+                @endguest
+
+                @auth
+                    <a href="{{ route('dashboard') }}"
+                        class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Dashboard
+                    </a>
+                @endauth
             </div>
         </nav>
         <div class="flex flex-col items-center gap-[30px]">
@@ -46,25 +55,27 @@
                 <div class="w-[100px] h-[48px] flex shrink-0">
                     <img src="assets/icon/avatar-group.png" class="object-contain" alt="icon">
                 </div>
-                <p class="font-semibold text-sm text-white">Join 3 million users</p>
+                <p class="font-semibold text-sm text-white">Sangat Direkomendasikan</p>
             </div>
             <div class="flex flex-col gap-[10px]">
-                <h1 class="font-semibold text-[80px] leading-[82px] text-center gradient-text-hero">Build Future Career.
+                <h1 class="font-semibold leading-[82px] text-center gradient-text-hero" style="font-size: 60px">Bangun
+                    Karier Masa
+                    Depan.
                 </h1>
-                <p class="text-center text-xl leading-[36px] text-[#F5F8FA]">Alqowy provides high quality online courses
-                    for you to grow <br>
-                    your skills and build outstanding portfolio to tackle job interviews</p>
+                <p class="text-center text-xl leading-[36px] text-[#F5F8FA]">AkbarHD menyediakan kursus online
+                    berkualitas tinggi bagi anda untuk mengembangkan <br>
+                    keterampilan Anda dan membangun portofolio yang luar biasa </p>
             </div>
             <div class="flex gap-6 w-fit">
                 <a href=""
-                    class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Explore
-                    Courses</a>
+                    class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Jelajahi
+                    kursus</a>
                 <a href=""
-                    class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Career
-                    Guidance</a>
+                    class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">bimbingan
+                    karir</a>
             </div>
         </div>
-        <div class="flex gap-[70px] items-center justify-center">
+        {{-- <div class="flex gap-[70px] items-center justify-center">
             <div>
                 <img src="assets/icon/logo-55.svg" alt="icon">
             </div>
@@ -80,7 +91,7 @@
             <div>
                 <img src="assets/icon/logo-52.svg" alt="icon">
             </div>
-        </div>
+        </div> --}}
     </div>
     <section id="Top-Categories" class="max-w-[1200px] mx-auto flex flex-col p-[70px_50px] gap-[30px]">
         <div class="flex flex-col gap-[30px]">
@@ -89,12 +100,13 @@
                 <div>
                     <img src="assets/icon/medal-star.svg" alt="icon">
                 </div>
-                <p class="font-medium text-sm text-[#FF6129]">Top Categories</p>
+                <p class="font-medium text-sm text-[#FF6129]">Kategori Teratas</p>
             </div>
             <div class="flex flex-col">
-                <h2 class="font-bold text-[40px] leading-[60px]">Browse Courses</h2>
-                <p class="text-[#6D7786] text-lg -tracking-[2%]">Catching up the on demand skills and high paying career
-                    this year</p>
+                <h2 class="font-bold text-[40px] leading-[60px]">Jelajahi Kursus</h2>
+                <p class="text-[#6D7786] text-lg -tracking-[2%]">Mengejar keterampilan sesuai permintaan dan karier
+                    bergaji tinggi
+                    tahun ini</p>
             </div>
         </div>
         <div class="grid grid-cols-4 gap-[30px]">
@@ -162,9 +174,10 @@
                 <p class="font-medium text-sm text-[#FF6129]">Popular Courses</p>
             </div>
             <div class="flex flex-col">
-                <h2 class="font-bold text-[40px] leading-[60px]">Don’t Missed It, Learn Now</h2>
-                <p class="text-[#6D7786] text-lg -tracking-[2%]">Catching up the on demand skills and high paying
-                    career this year</p>
+                <h2 class="font-bold  leading-[60px]" style="font-size: 30px;">Jangan Sampai Ketinggalan, Pelajari
+                    Sekarang</h2>
+                <p class="text-[#6D7786] text-lg -tracking-[2%]">Mengejar keterampilan sesuai permintaan dan karier
+                    bergaji tinggi tahun ini</p>
             </div>
         </div>
         <div class="relative">
@@ -175,276 +188,55 @@
                 <img src="assets/icon/arrow-right.svg" alt="icon">
             </button>
             <div id="course-slider" class="w-full">
-                <div class="course-card w-1/3 px-3 pb-[70px] mt-[2px]">
-                    <div
-                        class="flex flex-col rounded-t-[12px] rounded-b-[24px] gap-[32px] bg-white w-full pb-[10px] overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">
-                        <a href="details.html"
-                            class="thumbnail w-full h-[200px] shrink-0 rounded-[10px] overflow-hidden">
-                            <img src="assets/thumbnail/thumbnail-1.png" class="w-full h-full object-cover"
-                                alt="thumbnail">
-                        </a>
-                        <div class="flex flex-col px-4 gap-[10px]">
-                            <a href="details.html"
-                                class="font-semibold text-lg line-clamp-2 hover:line-clamp-none min-h-[56px]">Modern
-                                JavaScript: Bikin Projek Website Seperti Twitter</a>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-[2px]">
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
+                @forelse ($courses as $course)
+                    <div class="course-card w-1/3 px-3 pb-[70px] mt-[2px]">
+                        <div
+                            class="flex flex-col rounded-t-[12px] rounded-b-[24px] gap-[32px] bg-white w-full pb-[10px] overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">
+                            <a href="{{ route('front.details', $course) }}"
+                                class="thumbnail w-full h-[200px] shrink-0 rounded-[10px] overflow-hidden">
+                                <img src="{{ Storage::url($course->thumbnail) }}" class="w-full h-full object-cover"
+                                    alt="thumbnail">
+                            </a>
+                            <div class="flex flex-col px-4 gap-[10px]">
+                                <a href="{{ route('front.details', $course->slug) }}"
+                                    class="font-semibold text-lg line-clamp-2 hover:line-clamp-none min-h-[56px]">{{ $course->name }}</a>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center gap-[2px]">
+                                        <div>
+                                            <img src="assets/icon/star.svg" alt="star">
+                                        </div>
+                                        <div>
+                                            <img src="assets/icon/star.svg" alt="star">
+                                        </div>
+                                        <div>
+                                            <img src="assets/icon/star.svg" alt="star">
+                                        </div>
+                                        <div>
+                                            <img src="assets/icon/star.svg" alt="star">
+                                        </div>
+                                        <div>
+                                            <img src="assets/icon/star.svg" alt="star">
+                                        </div>
                                     </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
+                                    <p class="text-right text-[#6D7786]">{{ $course->students->count() }} students</p>
                                 </div>
-                                <p class="text-right text-[#6D7786]">32,280 students</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
-                                    <img src="assets/photo/photo1.png" class="w-full h-full object-cover"
-                                        alt="icon">
-                                </div>
-                                <div class="flex flex-col">
-                                    <p class="font-semibold">Angga Risky</p>
-                                    <p class="text-[#6D7786]">Full-Stack Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-card w-1/3 px-3 pb-[70px] mt-[2px]">
-                    <div
-                        class="flex flex-col rounded-t-[12px] rounded-b-[24px] gap-[32px] bg-white w-full pb-[10px] overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">
-                        <a href="details.html"
-                            class="thumbnail w-full h-[200px] shrink-0 rounded-[10px] overflow-hidden">
-                            <img src="assets/thumbnail/thumbnail-2.png" class="w-full h-full object-cover"
-                                alt="thumbnail">
-                        </a>
-                        <div class="flex flex-col px-4 gap-[10px]">
-                            <a href="details.html"
-                                class="font-semibold text-lg line-clamp-2 hover:line-clamp-none min-h-[56px]">Full-Stack
-                                JavaScript Next JS Developer: Build Job Portal Website</a>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-[2px]">
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
+                                        <img src="{{ Storage::url($course->teacher->user->avatar) }}"
+                                            class="w-full h-full object-cover" alt="icon">
                                     </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
+                                    <div class="flex flex-col">
+                                        <p class="font-semibold">{{ $course->teacher->user->name }}</p>
+                                        <p class="text-[#6D7786]">{{ $course->category->name }}</p>
                                     </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                </div>
-                                <p class="text-right text-[#6D7786]">3,069 students</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
-                                    <img src="assets/photo/photo2.png" class="w-full h-full object-cover"
-                                        alt="icon">
-                                </div>
-                                <div class="flex flex-col">
-                                    <p class="font-semibold">Hariyanto</p>
-                                    <p class="text-[#6D7786]">Full-Stack Developer</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="course-card w-1/3 px-3 pb-[70px] mt-[2px]">
-                    <div
-                        class="flex flex-col rounded-t-[12px] rounded-b-[24px] gap-[32px] bg-white w-full pb-[10px] overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">
-                        <a href="details.html"
-                            class="thumbnail w-full h-[200px] shrink-0 rounded-[10px] overflow-hidden">
-                            <img src="assets/thumbnail/thumbnail-3.png" class="w-full h-full object-cover"
-                                alt="thumbnail">
-                        </a>
-                        <div class="flex flex-col px-4 gap-[10px]">
-                            <a href="details.html"
-                                class="font-semibold text-lg line-clamp-2 hover:line-clamp-none min-h-[56px]">Modern
-                                JavaScript: Bikin Projek Website Seperti Twitter</a>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-[2px]">
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                </div>
-                                <p class="text-right text-[#6D7786]">41,070 students</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
-                                    <img src="assets/photo/photo3.png" class="w-full h-full object-cover"
-                                        alt="icon">
-                                </div>
-                                <div class="flex flex-col">
-                                    <p class="font-semibold">Muhamad Fadli</p>
-                                    <p class="text-[#6D7786]">UX Designer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-card w-1/3 px-3 pb-[70px] mt-[2px]">
-                    <div
-                        class="flex flex-col rounded-t-[12px] rounded-b-[24px] gap-[32px] bg-white w-full pb-[10px] overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">
-                        <a href="details.html"
-                            class="thumbnail w-full h-[200px] shrink-0 rounded-[10px] overflow-hidden">
-                            <img src="assets/thumbnail/thumbnail-1.png" class="w-full h-full object-cover"
-                                alt="thumbnail">
-                        </a>
-                        <div class="flex flex-col px-4 gap-[10px]">
-                            <a href="details.html"
-                                class="font-semibold text-lg line-clamp-2 hover:line-clamp-none min-h-[56px]">Modern
-                                JavaScript: Bikin Projek Website Seperti Twitter</a>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-[2px]">
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                </div>
-                                <p class="text-right text-[#6D7786]">32,280 students</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
-                                    <img src="assets/photo/photo1.png" class="w-full h-full object-cover"
-                                        alt="icon">
-                                </div>
-                                <div class="flex flex-col">
-                                    <p class="font-semibold">Angga Risky</p>
-                                    <p class="text-[#6D7786]">Full-Stack Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-card w-1/3 px-3 pb-[70px] mt-[2px]">
-                    <div
-                        class="flex flex-col rounded-t-[12px] rounded-b-[24px] gap-[32px] bg-white w-full pb-[10px] overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">
-                        <a href="details.html"
-                            class="thumbnail w-full h-[200px] shrink-0 rounded-[10px] overflow-hidden">
-                            <img src="assets/thumbnail/thumbnail-2.png" class="w-full h-full object-cover"
-                                alt="thumbnail">
-                        </a>
-                        <div class="flex flex-col px-4 gap-[10px]">
-                            <a href="details.html"
-                                class="font-semibold text-lg line-clamp-2 hover:line-clamp-none min-h-[56px]">Full-Stack
-                                JavaScript Next JS Developer: Build Job Portal Website</a>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-[2px]">
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                </div>
-                                <p class="text-right text-[#6D7786]">3,069 students</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
-                                    <img src="assets/photo/photo2.png" class="w-full h-full object-cover"
-                                        alt="icon">
-                                </div>
-                                <div class="flex flex-col">
-                                    <p class="font-semibold">Hariyanto</p>
-                                    <p class="text-[#6D7786]">Full-Stack Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-card w-1/3 px-3 pb-[70px] mt-[2px]">
-                    <div
-                        class="flex flex-col rounded-t-[12px] rounded-b-[24px] gap-[32px] bg-white w-full pb-[10px] overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">
-                        <a href="details.html"
-                            class="thumbnail w-full h-[200px] shrink-0 rounded-[10px] overflow-hidden">
-                            <img src="assets/thumbnail/thumbnail-3.png" class="w-full h-full object-cover"
-                                alt="thumbnail">
-                        </a>
-                        <div class="flex flex-col px-4 gap-[10px]">
-                            <a href="details.html"
-                                class="font-semibold text-lg line-clamp-2 hover:line-clamp-none min-h-[56px]">Modern
-                                JavaScript: Bikin Projek Website Seperti Twitter</a>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-[2px]">
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                    <div>
-                                        <img src="assets/icon/star.svg" alt="star">
-                                    </div>
-                                </div>
-                                <p class="text-right text-[#6D7786]">41,070 students</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 flex shrink-0 rounded-full overflow-hidden">
-                                    <img src="assets/photo/photo3.png" class="w-full h-full object-cover"
-                                        alt="icon">
-                                </div>
-                                <div class="flex flex-col">
-                                    <p class="font-semibold">Muhamad Fadli</p>
-                                    <p class="text-[#6D7786]">UX Designer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                @empty
+                @endforelse
+
             </div>
         </div>
     </section>
