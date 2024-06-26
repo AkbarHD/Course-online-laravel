@@ -15,7 +15,7 @@
     <div id="hero-section"
         class="max-w-[1200px] mx-auto w-full flex flex-col gap-10 pb-[50px] bg-[url('assets/background/Hero-Banner.png')] bg-center bg-no-repeat bg-cover rounded-[32px] overflow-hidden">
         <nav class="flex justify-between items-center pt-6 px-[50px]">
-            <a href="">
+            <a href="{{ route('front.index') }}">
                 {{-- <img src="assets/logo/logo.svg" alt="logo"> --}}
                 <h1 class="font-bold text-white " style="font-size: 30px">AkbarHD</h1>
             </a>
@@ -116,58 +116,20 @@
             </div>
         </div>
         <div class="grid grid-cols-4 gap-[30px]">
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Software Development</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Digital Marketing</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-2.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Business Intelligence</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-3.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Freelancing Journey</p>
-            </a>
+            @forelse ($categories as $category)
+                <a href="{{ route('front.category', $category->slug) }}"
+                    class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
+                    <div class="w-[70px] h-[70px] flex shrink-0">
+                        <img src="{{ Storage::url($category->icon) }}" class="object-contain" alt="icon">
+                    </div>
+                    <p class="font-bold text-lg">{{ $category->name }}</p>
+                </a>
+            @empty
+                <p>Category belum tersedia</p>
+            @endforelse
+
         </div>
-        <div class="grid grid-cols-3 gap-[30px]">
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Product & Customer Data Analytics</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-4.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">UX Design <br> Copywriting</p>
-            </a>
-            <a href="category.html"
-                class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Software Quality Assurance</p>
-            </a>
-        </div>
+
     </section>
     <section id="Popular-Courses"
         class="max-w-[1200px] mx-auto flex flex-col p-[70px_82px_0px] gap-[30px] bg-[#F5F8FA] rounded-[32px]">
@@ -852,7 +814,7 @@
         <div class="flex justify-between">
             <a href="">
                 <div>
-                    <img src="assets/logo/logo-black.svg" alt="logo">
+                    <h1 class="font-bold text-black " style="font-size: 30px">AkbarHD</h1>
                 </div>
             </a>
             <div class="flex flex-col gap-5">
